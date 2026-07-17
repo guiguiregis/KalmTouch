@@ -3,28 +3,28 @@ import Image from "next/image";
 const services = [
   {
     name: "Swedish Massage",
-    duration: "60 or 90 min",
+    duration: "60 min",
     detail:
       "Long, flowing strokes to ease everyday tension and quiet the nervous system.",
   },
   {
     name: "Deep Tissue",
-    duration: "60 or 90 min",
+    duration: "60 min",
     detail:
       "Slower pressure for stubborn knots, posture strain, and lasting tightness.",
   },
-  {
-    name: "Prenatal Care",
-    duration: "60 min",
-    detail:
-      "Side-lying comfort work designed for pregnancy — gentle, supported, restorative.",
-  },
-  {
-    name: "Hot Stone Ritual",
-    duration: "90 min",
-    detail:
-      "Warmed stones melt resistance so muscles can soften without force.",
-  },
+  // {
+  //   name: "Prenatal Care",
+  //   duration: "60 min",
+  //   detail:
+  //     "Side-lying comfort work designed for pregnancy — gentle, supported, restorative.",
+  // },
+  // {
+  //   name: "Hot Stone Ritual",
+  //   duration: "90 min",
+  //   detail:
+  //     "Warmed stones melt resistance so muscles can soften without force.",
+  // },
 ];
 
 export default function Home() {
@@ -51,6 +51,9 @@ export default function Home() {
             </a>
             <a href="#visit" className="transition-colors hover:text-white">
               Visit
+            </a>
+            <a href="#contact" className="transition-colors hover:text-white">
+              Contact
             </a>
           </div>
           <a
@@ -212,24 +215,24 @@ export default function Home() {
                   Location
                 </p>
                 <p className="mt-3 text-lg leading-relaxed text-foreground">
-                  214 Willow Lane, Suite 2
+                  Ottawa/Gatineau Area
                   <br />
-                  Portland, OR 97214
+                  On-Site
                 </p>
                 <p className="mt-6 text-sm font-medium uppercase tracking-[0.14em] text-accent">
                   Hours
                 </p>
                 <p className="mt-3 text-lg leading-relaxed text-foreground">
-                  Tue–Fri · 10am–7pm
+                  Mon–Thu · 6:30pm–9:30pm
                   <br />
-                  Sat · 9am–3pm
+                  Sat-Sun · Evenings On-Demand
                 </p>
               </div>
 
               <form
                 id="book"
                 className="flex flex-col gap-4"
-                action="mailto:hello@kalmtouch.com"
+                action="mailto:kalmtouch18@gmail.com"
                 method="get"
                 encType="text/plain"
               >
@@ -273,6 +276,24 @@ export default function Home() {
                     ))}
                   </select>
                 </label>
+                <label className="block">
+                  <span className="mb-2 block text-sm font-medium text-foreground">
+                    Preferred hour
+                  </span>
+                  <select
+                    name="hour"
+                    required
+                    className="w-full rounded-md border border-stone bg-white/80 px-4 py-3 text-foreground outline-none transition focus:border-accent"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Select a time
+                    </option>
+                    <option value="18:30">6:30 PM</option>
+                    <option value="20:00">8:00 PM</option>
+                    <option value="21:30">9:30 PM</option>
+                  </select>
+                </label>
                 <button
                   type="submit"
                   className="mt-2 rounded-md bg-accent px-6 py-3 text-sm font-medium text-white transition hover:bg-accent-deep"
@@ -288,6 +309,83 @@ export default function Home() {
                     (503) 555-0142
                   </a>
                 </p>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section
+          id="contact"
+          className="bg-surface px-6 py-24 md:px-10 md:py-32"
+        >
+          <div className="mx-auto max-w-6xl">
+            <h2 className="font-display text-4xl tracking-tight text-foreground md:text-5xl">
+              Get in touch
+            </h2>
+            <p className="mt-4 max-w-md text-muted md:text-lg">
+              Questions about a session, gift certificates, or anything else —
+              write to us and we&apos;ll reply within a day.
+            </p>
+
+            <div className="mt-14 grid gap-12 md:grid-cols-2">
+              <div>
+                <p className="text-sm font-medium uppercase tracking-[0.14em] text-accent">
+                  Email
+                </p>
+                <a
+                  href="mailto:kalmtouch18@gmail.com"
+                  className="mt-3 block text-lg font-medium text-foreground transition hover:text-accent"
+                >
+                  kalmtouch18@gmail.com
+                </a>
+                <p className="mt-6 text-sm font-medium uppercase tracking-[0.14em] text-accent">
+                  Phone
+                </p>
+                <a
+                  href="tel:+15035550142"
+                  className="mt-3 block text-lg font-medium text-foreground transition hover:text-accent"
+                >
+                  (503) 555-0142
+                </a>
+              </div>
+
+              <form
+                className="flex flex-col gap-4"
+                action="mailto:kalmtouch18@gmail.com"
+                method="get"
+                encType="text/plain"
+              >
+                <label className="block">
+                  <span className="mb-2 block text-sm font-medium text-foreground">
+                    Subject
+                  </span>
+                  <input
+                    name="subject"
+                    type="text"
+                    required
+                    className="w-full rounded-md border border-stone bg-white/80 px-4 py-3 text-foreground outline-none transition focus:border-accent"
+                    placeholder="How can we help?"
+                  />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block text-sm font-medium text-foreground">
+                    Message
+                  </span>
+                  <textarea
+                    name="body"
+                    required
+                    rows={5}
+                    className="w-full resize-y rounded-md border border-stone bg-white/80 px-4 py-3 text-foreground outline-none transition focus:border-accent"
+                    placeholder="Write your message..."
+                  />
+                </label>
+                <button
+                  type="submit"
+                  className="mt-2 rounded-md bg-accent px-6 py-3 text-sm font-medium text-white transition hover:bg-accent-deep"
+                >
+                  Send email
+                </button>
               </form>
             </div>
           </div>
