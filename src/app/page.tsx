@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HeroCarousel from "./hero-carousel";
 
 const services = [
   {
@@ -68,16 +69,7 @@ export default function Home() {
       <main id="top" className="flex-1">
         {/* Hero — one composition: brand, headline, support, CTA, full-bleed image */}
         <section className="relative min-h-[100svh] overflow-hidden">
-          <div className="absolute inset-0 animate-drift">
-            <Image
-              src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=2400&q=80"
-              alt="Calm massage room with soft natural light"
-              fill
-              priority
-              className="object-cover object-center"
-              sizes="100vw"
-            />
-          </div>
+          <HeroCarousel />
           <div
             className="absolute inset-0 animate-veil"
             style={{
