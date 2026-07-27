@@ -74,6 +74,12 @@ export type Messages = {
     rights: string;
     hours: Array<{ days: string; detail: string }>;
   };
+  share: {
+    label: string;
+    text: string;
+    copied: string;
+    failed: string;
+  };
   booking: {
     loading: string;
     notConfigured: string;
@@ -222,6 +228,12 @@ export const messages: Record<Locale, Messages> = {
         { days: "Mon–Thu", detail: "6:30pm–9:30pm" },
         { days: "Sat–Sun", detail: "Evenings on demand" },
       ],
+    },
+    share: {
+      label: "Share",
+      text: "KalmTouch — restorative on-site massage in the Ottawa/Gatineau area.",
+      copied: "Link copied",
+      failed: "Couldn’t copy link",
     },
     booking: {
       loading: "Loading available times…",
@@ -374,6 +386,12 @@ export const messages: Record<Locale, Messages> = {
         { days: "Lun–Jeu", detail: "18 h 30–21 h 30" },
         { days: "Sam–Dim", detail: "Soirées sur demande" },
       ],
+    },
+    share: {
+      label: "Partager",
+      text: "KalmTouch — massage à domicile restaurateur dans la région d’Ottawa/Gatineau.",
+      copied: "Lien copié",
+      failed: "Impossible de copier",
     },
     booking: {
       loading: "Chargement des plages disponibles…",

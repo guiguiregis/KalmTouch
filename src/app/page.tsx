@@ -7,6 +7,7 @@ import ContactForm from "./contact-form";
 import HeroCarousel from "./hero-carousel";
 import LanguageToggle from "./language-toggle";
 import MobileNav from "./mobile-nav";
+import ShareButton from "./share-button";
 import { BOOKING_SERVICES } from "@/lib/calendar/config";
 import { formatMessage } from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/locale-provider";
@@ -112,6 +113,7 @@ export default function Home() {
                 >
                   {t.hero.viewServices}
                 </a>
+                <ShareButton variant="hero" />
               </div>
             </div>
           </div>
@@ -393,6 +395,9 @@ export default function Home() {
                   />
                   {SITE.instagramHandle}
                 </a>
+              </li>
+              <li>
+                <ShareButton />
               </li>
             </ul>
           </div>
