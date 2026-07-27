@@ -71,6 +71,8 @@ export type Messages = {
     visit: string;
     social: string;
     contact: string;
+    privacy: string;
+    terms: string;
     rights: string;
     hours: Array<{ days: string; detail: string }>;
   };
@@ -223,6 +225,8 @@ export const messages: Record<Locale, Messages> = {
       visit: "Visit",
       social: "Social",
       contact: "Contact",
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
       rights: "All rights reserved.",
       hours: [
         { days: "Mon–Thu", detail: "6:30pm–9:30pm" },
@@ -381,6 +385,8 @@ export const messages: Record<Locale, Messages> = {
       visit: "Visite",
       social: "Réseaux",
       contact: "Contact",
+      privacy: "Politique de confidentialité",
+      terms: "Conditions d’utilisation",
       rights: "Tous droits réservés.",
       hours: [
         { days: "Lun–Jeu", detail: "18 h 30–21 h 30" },

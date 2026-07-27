@@ -351,6 +351,16 @@ export default function Home() {
                   {t.nav.contact}
                 </a>
               </li>
+              <li>
+                <a href="/privacy" className="transition hover:text-accent">
+                  {t.footer.privacy}
+                </a>
+              </li>
+              <li>
+                <a href="/terms" className="transition hover:text-accent">
+                  {t.footer.terms}
+                </a>
+              </li>
             </ul>
           </div>
 
