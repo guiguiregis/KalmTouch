@@ -208,27 +208,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Google OAuth branding: app purpose + Google data use */}
-        <section
-          id="platform"
-          className="border-y border-stone/70 bg-background px-6 py-20 md:px-10 md:py-24"
-        >
-          <div className="mx-auto max-w-3xl">
-            <h2 className="font-display text-3xl tracking-tight text-foreground md:text-4xl">
-              {t.platform.title}
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted md:text-lg">
-              {t.platform.body}
-            </p>
-            <a
-              href="/privacy"
-              className="mt-6 inline-block text-sm font-medium text-accent transition hover:text-accent-deep"
-            >
-              {t.platform.privacyLink}
-            </a>
-          </div>
-        </section>
-
         {/* Visit / Book */}
         <section
           id="visit"
