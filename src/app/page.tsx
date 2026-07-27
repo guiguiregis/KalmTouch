@@ -94,6 +94,12 @@ export default function Home() {
                   sizes="(max-width: 640px) 144px, (max-width: 768px) 176px, 208px"
                 />
               </div>
+              <p className="animate-rise mt-5 font-display text-4xl font-medium tracking-tight text-white sm:text-5xl md:text-6xl hidden">
+                KalmTouch
+              </p>
+              <p className="animate-rise mt-2 text-sm font-medium uppercase tracking-[0.16em] text-white/70">
+                {SITE.tagline}
+              </p>
               <h1 className="animate-rise-delay mt-6 max-w-xl font-display text-2xl font-light leading-snug text-white/95 sm:text-3xl md:text-4xl">
                 {t.hero.headline}
               </h1>
@@ -202,6 +208,27 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Google OAuth branding: app purpose + Google data use */}
+        <section
+          id="platform"
+          className="border-y border-stone/70 bg-background px-6 py-20 md:px-10 md:py-24"
+        >
+          <div className="mx-auto max-w-3xl">
+            <h2 className="font-display text-3xl tracking-tight text-foreground md:text-4xl">
+              {t.platform.title}
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted md:text-lg">
+              {t.platform.body}
+            </p>
+            <a
+              href="/privacy"
+              className="mt-6 inline-block text-sm font-medium text-accent transition hover:text-accent-deep"
+            >
+              {t.platform.privacyLink}
+            </a>
+          </div>
+        </section>
+
         {/* Visit / Book */}
         <section
           id="visit"
@@ -302,15 +329,20 @@ export default function Home() {
       <footer className="border-t border-stone/70 bg-background px-6 py-12 md:px-10 md:py-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-12 sm:flex-row sm:flex-wrap sm:justify-between sm:gap-x-10 sm:gap-y-12 lg:flex-nowrap">
           <div className="flex min-w-[10rem] max-w-xs flex-col gap-5">
-            <a href="#top" className="relative block h-16 w-16 shrink-0">
-              <Image
-                src="/images/kalm-touch-logo.png"
-                alt="KalmTouch"
-                fill
-                quality={100}
-                className="object-contain"
-                sizes="64px"
-              />
+            <a href="#top" className="flex items-center gap-3">
+              <span className="relative block h-16 w-16 shrink-0">
+                <Image
+                  src="/images/kalm-touch-logo.png"
+                  alt=""
+                  fill
+                  quality={100}
+                  className="object-contain"
+                  sizes="64px"
+                />
+              </span>
+              <span className="font-display text-xl font-medium tracking-tight text-foreground">
+                KalmTouch
+              </span>
             </a>
             <p className="text-sm leading-relaxed text-muted">{t.footer.blurb}</p>
             <a
