@@ -83,7 +83,7 @@ export default function Home() {
           />
           <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-6 pb-16 pt-28 md:px-10 md:pb-24">
             <div className="mx-auto w-full max-w-6xl">
-              <div className="animate-rise relative h-36 w-36 sm:h-44 sm:w-44 md:h-52 md:w-52">
+              <div className="animate-rise relative h-36 w-36 sm:h-44 sm:w-44 md:h-52 md:w-52 hidden">
                 <Image
                   src="/images/kalm-touch-logo.png"
                   alt="KalmTouch"
@@ -94,7 +94,7 @@ export default function Home() {
                   sizes="(max-width: 640px) 144px, (max-width: 768px) 176px, 208px"
                 />
               </div>
-              <p className="animate-rise mt-5 font-display text-4xl font-medium tracking-tight text-white sm:text-5xl md:text-6xl hidden">
+              <p className="animate-rise mt-5 font-display text-4xl font-medium tracking-tight text-white sm:text-5xl md:text-6xl">
                 KalmTouch
               </p>
               <p className="animate-rise mt-2 text-sm font-medium uppercase tracking-[0.16em] text-white/70">
