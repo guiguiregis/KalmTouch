@@ -5,15 +5,15 @@ import { useEffect, useState } from "react";
 
 const slides = [
   {
-    src: "/hero/hands-deep-1.jpg",
+    src: "/images/hero/hands-deep-1.jpg",
     alt: "Black massage therapist's hands performing deep tissue massage on a client's upper back",
   },
   {
-    src: "/hero/hands-deep-2.jpg",
+    src: "/images/hero/hands-deep-2.jpg",
     alt: "Black massage therapist's hands applying firm Swedish massage strokes across draped shoulders",
   },
   {
-    src: "/hero/atmosphere.jpg",
+    src: "/images/hero/atmosphere.jpg",
     alt: "Calm massage room with towels, oil, basalt stones, eucalyptus, and candlelight",
   },
 ] as const;

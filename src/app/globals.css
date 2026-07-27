@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f3f7f8;
-  --foreground: #0f2a33;
-  --muted: #4f6a73;
-  --surface: #e6eef0;
-  --accent: #1b7b9c;
-  --accent-deep: #134d6e;
-  --mist: #b8e0de;
-  --stone: #c9d5d8;
-  --hero-veil: rgba(10, 28, 36, 0.5);
+  /* Derived from kalm-touch-logo.png */
+  --background: #f1f7f5;
+  --foreground: #0a2f38;
+  --muted: #4a6b72;
+  --surface: #e5f0ec;
+  --accent: #0c5c7a;
+  --accent-deep: #006080;
+  --mist: #b5e8d6;
+  --stone: #c4d5d1;
+  --lime: #76d28b;
+  --teal: #3ab7ad;
+  --hero-veil: rgba(6, 48, 58, 0.52);
 }
 
 @theme inline {
@@ -21,6 +24,8 @@
   --color-accent-deep: var(--accent-deep);
   --color-mist: var(--mist);
   --color-stone: var(--stone);
+  --color-lime: var(--lime);
+  --color-teal: var(--teal);
   --font-sans: var(--font-manrope);
   --font-display: var(--font-fraunces);
 }
@@ -70,6 +75,17 @@ body {
   }
 }
 
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.35rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-rise {
   animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -90,6 +106,10 @@ body {
   animation: drift 28s ease-in-out infinite;
 }
 
+.animate-dropdown {
+  animation: dropdown-in 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -99,7 +119,8 @@ body {
   .animate-rise-delay,
   .animate-rise-delay-2,
   .animate-veil,
-  .animate-drift {
+  .animate-drift,
+  .animate-dropdown {
     animation: none;
   }
 }
