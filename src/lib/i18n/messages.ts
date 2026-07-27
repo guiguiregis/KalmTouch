@@ -26,6 +26,11 @@ export type Messages = {
     book: string;
     viewServices: string;
   };
+  platform: {
+    title: string;
+    body: string;
+    privacyLink: string;
+  };
   services: {
     title: string;
     intro: string;
@@ -171,6 +176,11 @@ export const messages: Record<Locale, Messages> = {
         "An unhurried studio for Swedish, deep tissue, and prenatal bodywork — quiet rooms, skilled hands, lasting calm.",
       book: "Book a session",
       viewServices: "View services",
+    },
+    platform: {
+      title: "How KalmTouch uses Google",
+      body: "KalmTouch is the booking and contact website for KalmTouch Massage in the Ottawa/Gatineau area. We use Google Calendar to check availability and create appointments, and Gmail to send calendar invites and contact-form replies. Clients never sign in with Google — only the studio Google account connects to run those features.",
+      privacyLink: "Read our Privacy Policy",
     },
     services: {
       title: "Services",
@@ -330,6 +340,11 @@ export const messages: Record<Locale, Messages> = {
         "Un espace sans précipitation pour le suédois, le tissus profonds et le prénatal — pièces calmes, mains attentives, détente durable.",
       book: "Réserver une séance",
       viewServices: "Voir les services",
+    },
+    platform: {
+      title: "Comment KalmTouch utilise Google",
+      body: "KalmTouch est le site de réservation et de contact de KalmTouch Massage dans la région d’Ottawa/Gatineau. Nous utilisons Google Calendar pour vérifier la disponibilité et créer les rendez-vous, et Gmail pour envoyer les invitations calendrier et les réponses au formulaire de contact. Les clients ne se connectent jamais avec Google — seul le compte Google du studio est lié pour faire fonctionner ces fonctionnalités.",
+      privacyLink: "Lire notre politique de confidentialité",
     },
     services: {
       title: "Services",
