@@ -33,6 +33,8 @@ export type Messages = {
     getInTouch: string;
     bookNow: string;
     duration: string;
+    price: string;
+    insuranceReceipt: string;
   };
   serviceDetails: Record<
     string,
@@ -130,6 +132,84 @@ export type Messages = {
     bookAppointment: string;
     reset: string;
     orCall: string;
+    insuranceReceipt: string;
+  };
+  intake: {
+    title: string;
+    intro: string;
+    consent: string;
+    privacyLink: string;
+    bookingSummary: string;
+    bodyMap: string;
+    front: string;
+    back: string;
+    legendFocus: string;
+    legendAvoid: string;
+    legendHint: string;
+    preferredPressure: string;
+    pressureLight: string;
+    pressureMedium: string;
+    pressureFirm: string;
+    painPoints: string;
+    painPointsPlaceholder: string;
+    nerveSymptoms: string;
+    nerveSymptomsPlaceholder: string;
+    healthIssues: string;
+    healthIssuesPlaceholder: string;
+    allergies: string;
+    allergiesPlaceholder: string;
+    scentTolerance: string;
+    scentTolerancePlaceholder: string;
+    occupation: string;
+    occupationPlaceholder: string;
+    sports: string;
+    sportsPlaceholder: string;
+    recentInjury: string;
+    recentInjuryPlaceholder: string;
+    recentInjuryDetails: string;
+    recentInjuryDetailsPlaceholder: string;
+    recentSurgery: string;
+    recentSurgeryPlaceholder: string;
+    surgeryDetails: string;
+    surgeryDetailsPlaceholder: string;
+    pregnancy: string;
+    pregnancyPlaceholder: string;
+    pregnancyDuration: string;
+    pregnancyDurationPlaceholder: string;
+    recentMassage: string;
+    recentMassagePlaceholder: string;
+    recentMassageWhen: string;
+    recentMassageWhenPlaceholder: string;
+    recentMassageAreas: string;
+    recentMassageAreasPlaceholder: string;
+    medication: string;
+    medicationPlaceholder: string;
+    contraindications: string;
+    contraindicationHighBloodPressure: string;
+    contraindicationBloodClot: string;
+    contraindicationSkinInfection: string;
+    contraindicationFever: string;
+    contraindicationCancerTreatment: string;
+    drapingPreferences: string;
+    drapingPreferencesPlaceholder: string;
+    homeAccess: string;
+    homeAccessPlaceholder: string;
+    emergencyContactName: string;
+    emergencyContactNamePlaceholder: string;
+    emergencyContactPhone: string;
+    emergencyContactPhonePlaceholder: string;
+    other: string;
+    otherPlaceholder: string;
+    informedConsent: string;
+    consentRequired: string;
+    submit: string;
+    skip: string;
+    submitting: string;
+    success: string;
+    successEmailed: string;
+    failed: string;
+    failedRetry: string;
+    continueAnyway: string;
   };
   contactForm: {
     name: string;
@@ -180,6 +260,9 @@ export const messages: Record<Locale, Messages> = {
       getInTouch: "Get in touch",
       bookNow: "Book now",
       duration: "{minutes} min",
+      price: "${price} CAD",
+      insuranceReceipt:
+        "A receipt or invoice is available for insurance purposes.",
     },
     serviceDetails: {
       swedish: {
@@ -290,6 +373,93 @@ export const messages: Record<Locale, Messages> = {
       bookAppointment: "Book appointment",
       reset: "Reset",
       orCall: "Or call",
+      insuranceReceipt:
+        "A receipt or invoice is available for insurance purposes.",
+    },
+    intake: {
+      title: "Health intake (optional)",
+      intro:
+        "Your appointment is booked. Share anything that helps us tailor the session — or send a blank form to finish.",
+      consent:
+        "Health details are stored securely for your therapist on the studio Google account (PDF + client sheet), and a PDF copy is emailed to you. See our",
+      privacyLink: "Privacy Policy",
+      bookingSummary: "Booked for {label}",
+      bodyMap: "Muscle map — choose Focus or Avoid, then tap muscle groups",
+      front: "Front",
+      back: "Back",
+      legendFocus: "Focus",
+      legendAvoid: "Avoid",
+      legendHint:
+        "Select a mode, then tap muscles on the front or back figure. Switch modes to mark both.",
+      preferredPressure: "Preferred pressure",
+      pressureLight: "Light",
+      pressureMedium: "Medium",
+      pressureFirm: "Firm",
+      painPoints: "Specific pain points",
+      painPointsPlaceholder: "Where it hurts, and what aggravates it…",
+      nerveSymptoms: "Pain, numbness, or tingling",
+      nerveSymptomsPlaceholder:
+        "Describe symptoms and whether they radiate (e.g. into an arm or leg)…",
+      healthIssues: "Health concerns",
+      healthIssuesPlaceholder: "Conditions we should know about…",
+      allergies: "Allergies",
+      allergiesPlaceholder: "Oils, latex, metals, etc.",
+      scentTolerance: "Scent tolerance",
+      scentTolerancePlaceholder: "Sensitive to certain oils or fragrances?",
+      occupation: "Occupation",
+      occupationPlaceholder: "Desk work, trades, caregiving…",
+      sports: "Sports / activity",
+      sportsPlaceholder: "Running, gym, yoga…",
+      recentInjury: "Recent injury or accident?",
+      recentInjuryPlaceholder: "Yes / no, and roughly when",
+      recentInjuryDetails: "Injury details",
+      recentInjuryDetailsPlaceholder: "Sprain, fall, car accident, restrictions…",
+      recentSurgery: "Recent surgery?",
+      recentSurgeryPlaceholder: "Yes / no, and when",
+      surgeryDetails: "Surgery details",
+      surgeryDetailsPlaceholder: "Procedure, restrictions, healing…",
+      pregnancy: "Pregnancy",
+      pregnancyPlaceholder: "Yes / no",
+      pregnancyDuration: "Pregnancy duration",
+      pregnancyDurationPlaceholder: "e.g. 28 weeks",
+      recentMassage: "Recent massage?",
+      recentMassagePlaceholder: "Yes / no",
+      recentMassageWhen: "When",
+      recentMassageWhenPlaceholder: "Approximate date",
+      recentMassageAreas: "Areas massaged",
+      recentMassageAreasPlaceholder: "Back, neck, legs…",
+      medication: "Medication",
+      medicationPlaceholder: "Current medications relevant to massage…",
+      contraindications: "Please check any that apply",
+      contraindicationHighBloodPressure: "High blood pressure",
+      contraindicationBloodClot: "Blood clot / phlebitis",
+      contraindicationSkinInfection: "Skin infection or open wound",
+      contraindicationFever: "Fever or contagious illness",
+      contraindicationCancerTreatment: "Cancer treatment (current)",
+      drapingPreferences: "Draping / comfort preferences",
+      drapingPreferencesPlaceholder:
+        "Areas you prefer to keep covered, or are comfortable uncovering…",
+      homeAccess: "Home access notes",
+      homeAccessPlaceholder: "Door code, parking, floor, pets…",
+      emergencyContactName: "Emergency contact name",
+      emergencyContactNamePlaceholder: "Full name",
+      emergencyContactPhone: "Emergency contact phone",
+      emergencyContactPhonePlaceholder: "(555) 555-5555",
+      other: "Anything else",
+      otherPlaceholder: "Preferences or details not listed above…",
+      informedConsent:
+        "I confirm the information is accurate to the best of my knowledge, and I understand massage does not replace medical advice or treatment.",
+      consentRequired: "Please confirm the consent checkbox to submit the form.",
+      submit: "Submit form",
+      skip: "Skip / send empty",
+      submitting: "Saving…",
+      success: "Thank you — your intake was saved with the booking.",
+      successEmailed:
+        "Thank you — your intake was saved with the booking, and a PDF copy was emailed to you.",
+      failed: "Could not save the health form.",
+      failedRetry:
+        "Your booking is still confirmed, but the health form could not be saved. Please contact us.",
+      continueAnyway: "Continue",
     },
     contactForm: {
       name: "Name",
@@ -339,6 +509,9 @@ export const messages: Record<Locale, Messages> = {
       getInTouch: "Écrivez-nous",
       bookNow: "Réserver",
       duration: "{minutes} min",
+      price: "{price} $ CAD",
+      insuranceReceipt:
+        "Une facture ou un reçu est disponible à des fins d’assurance.",
     },
     serviceDetails: {
       swedish: {
@@ -453,6 +626,95 @@ export const messages: Record<Locale, Messages> = {
       bookAppointment: "Réserver le rendez-vous",
       reset: "Réinitialiser",
       orCall: "Ou appelez",
+      insuranceReceipt:
+        "Une facture ou un reçu est disponible à des fins d’assurance.",
+    },
+    intake: {
+      title: "Fiche santé (facultatif)",
+      intro:
+        "Votre rendez-vous est enregistré. Indiquez ce qui peut aider à adapter la séance — ou envoyez le formulaire vide pour terminer.",
+      consent:
+        "Les détails de santé sont conservés de façon sécurisée pour votre thérapeute sur le compte Google du studio (PDF + feuille clients), et une copie PDF vous est envoyée par courriel. Voir notre",
+      privacyLink: "politique de confidentialité",
+      bookingSummary: "Réservé pour {label}",
+      bodyMap: "Carte musculaire — choisissez Insister ou Éviter, puis touchez les groupes",
+      front: "Avant",
+      back: "Arrière",
+      legendFocus: "Insister",
+      legendAvoid: "Éviter",
+      legendHint:
+        "Choisissez un mode, puis touchez les muscles sur la vue avant ou arrière. Changez de mode pour marquer les deux.",
+      preferredPressure: "Pression préférée",
+      pressureLight: "Légère",
+      pressureMedium: "Moyenne",
+      pressureFirm: "Ferme",
+      painPoints: "Points de douleur spécifiques",
+      painPointsPlaceholder: "Où ça fait mal, et ce qui aggrave…",
+      nerveSymptoms: "Douleur, engourdissement ou picotements",
+      nerveSymptomsPlaceholder:
+        "Décrivez les symptômes et s’ils irradient (ex. dans un bras ou une jambe)…",
+      healthIssues: "Problèmes de santé",
+      healthIssuesPlaceholder: "Conditions à connaître…",
+      allergies: "Allergies",
+      allergiesPlaceholder: "Huiles, latex, métaux, etc.",
+      scentTolerance: "Tolérance aux odeurs",
+      scentTolerancePlaceholder: "Sensible à certaines huiles ou fragrances?",
+      occupation: "Occupation",
+      occupationPlaceholder: "Bureau, métiers, soins…",
+      sports: "Sport pratiqué",
+      sportsPlaceholder: "Course, gym, yoga…",
+      recentInjury: "Blessure ou accident récent?",
+      recentInjuryPlaceholder: "Oui / non, et environ quand",
+      recentInjuryDetails: "Détails de la blessure",
+      recentInjuryDetailsPlaceholder:
+        "Entorse, chute, accident auto, restrictions…",
+      recentSurgery: "Chirurgie récente?",
+      recentSurgeryPlaceholder: "Oui / non, et quand",
+      surgeryDetails: "Détails de la chirurgie",
+      surgeryDetailsPlaceholder: "Intervention, restrictions, guérison…",
+      pregnancy: "Grossesse",
+      pregnancyPlaceholder: "Oui / non",
+      pregnancyDuration: "Durée de grossesse",
+      pregnancyDurationPlaceholder: "ex. 28 semaines",
+      recentMassage: "Massage récent?",
+      recentMassagePlaceholder: "Oui / non",
+      recentMassageWhen: "Quand",
+      recentMassageWhenPlaceholder: "Date approximative",
+      recentMassageAreas: "Parties du corps",
+      recentMassageAreasPlaceholder: "Dos, cou, jambes…",
+      medication: "Médication",
+      medicationPlaceholder: "Médicaments pertinents pour le massage…",
+      contraindications: "Cochez ce qui s’applique",
+      contraindicationHighBloodPressure: "Tension artérielle élevée",
+      contraindicationBloodClot: "Caillot / phlébite",
+      contraindicationSkinInfection: "Infection cutanée ou plaie ouverte",
+      contraindicationFever: "Fièvre ou maladie contagieuse",
+      contraindicationCancerTreatment: "Traitement du cancer (en cours)",
+      drapingPreferences: "Préférences de drapage / confort",
+      drapingPreferencesPlaceholder:
+        "Zones à garder couvertes, ou que vous êtes à l’aise de découvrir…",
+      homeAccess: "Notes d’accès au domicile",
+      homeAccessPlaceholder: "Code, stationnement, étage, animaux…",
+      emergencyContactName: "Contact d’urgence — nom",
+      emergencyContactNamePlaceholder: "Nom complet",
+      emergencyContactPhone: "Contact d’urgence — téléphone",
+      emergencyContactPhonePlaceholder: "(555) 555-5555",
+      other: "Autre",
+      otherPlaceholder: "Préférences ou détails absents de la liste…",
+      informedConsent:
+        "Je confirme que ces renseignements sont exacts au meilleur de ma connaissance, et je comprends que le massage ne remplace pas un avis ou un traitement médical.",
+      consentRequired:
+        "Veuillez cocher la case de consentement pour envoyer le formulaire.",
+      submit: "Envoyer le formulaire",
+      skip: "Passer / envoyer vide",
+      submitting: "Enregistrement…",
+      success: "Merci — votre fiche a été enregistrée avec la réservation.",
+      successEmailed:
+        "Merci — votre fiche a été enregistrée avec la réservation, et une copie PDF vous a été envoyée par courriel.",
+      failed: "Impossible d’enregistrer la fiche santé.",
+      failedRetry:
+        "Votre réservation est toujours confirmée, mais la fiche santé n’a pas pu être enregistrée. Contactez-nous.",
+      continueAnyway: "Continuer",
     },
     contactForm: {
       name: "Nom",

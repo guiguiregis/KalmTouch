@@ -100,6 +100,7 @@ export async function bookAppointment(
   const description = [
     isRequest ? "Type: Weekend on-demand request (needs confirmation)" : "Type: Confirmed booking",
     `Service: ${service.name}`,
+    `Price: $${service.priceCad} CAD`,
     `Client: ${name}`,
     `Email: ${email}`,
     `Address: ${address}`,

@@ -24,6 +24,9 @@ export default function Home() {
       duration: formatMessage(t.services.duration, {
         minutes: service.duration,
       }),
+      price: formatMessage(t.services.price, {
+        price: service.priceCad,
+      }),
       detail: detail?.detail ?? service.description,
     };
   });
@@ -151,13 +154,15 @@ export default function Home() {
                   <p className="text-muted leading-relaxed">{service.detail}</p>
                   <div className="flex flex-col gap-2 md:items-end">
                     <p className="text-sm font-medium text-accent">
-                      {service.duration}
+                      {service.price}
                     </p>
+                    <p className="text-sm text-muted">{service.duration}</p>
                     <BookServiceLink serviceId={service.id} />
                   </div>
                 </li>
               ))}
             </ul>
+            <p className="mt-6 text-sm text-muted">{t.services.insuranceReceipt}</p>
             <p className="mt-8 text-muted">
               {t.services.questions}{" "}
               <a

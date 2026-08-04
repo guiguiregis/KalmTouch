@@ -1,18 +1,22 @@
 /**
  * One-time OAuth setup for the STUDIO Google account.
- * Covers Calendar booking + contact form email (Gmail send).
+ * Covers Calendar booking, contact form email (Gmail send),
+ * intake PDF upload (Drive), and client register (Sheets).
  * Website visitors never sign in to Google.
  *
  * Prerequisites:
  * 1. Google Cloud Console → create/select a project
- * 2. Enable "Google Calendar API" and "Gmail API"
+ * 2. Enable Google Calendar API, Gmail API, Google Drive API, Google Sheets API
  * 3. Configure OAuth consent screen (External, add kalmtouch18@gmail.com as test user)
  * 4. Create OAuth client ID → Application type: "Web application"
  * 5. Add redirect URI: http://localhost:3333/oauth2callback
  * 6. Copy client id + secret into .env.local
+ * 7. Create a Drive folder for intake PDFs and a Google Sheet for clients;
+ *    paste their IDs into GOOGLE_DRIVE_INTAKE_FOLDER_ID and GOOGLE_SHEETS_CLIENTS_ID
  *
  * Then run: npm run google:auth
  * Sign in once as kalmtouch18@gmail.com and paste the refresh token into .env.local
+ * Re-run after scope changes so the refresh token includes Drive + Sheets.
  */
 import { createServer } from "node:http";
 import { parse } from "node:url";
@@ -27,6 +31,8 @@ const REDIRECT_URI = `http://localhost:${PORT}/oauth2callback`;
 const SCOPES = [
   "https://www.googleapis.com/auth/calendar",
   "https://www.googleapis.com/auth/gmail.send",
+  "https://www.googleapis.com/auth/drive.file",
+  "https://www.googleapis.com/auth/spreadsheets",
 ];
 
 async function main() {
@@ -100,7 +106,8 @@ Missing GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET.
 
     server.listen(PORT, () => {
       console.log(`
-Open this URL in your browser and sign in as the KalmTouch calendar/email account:
+Open this URL in your browser and sign in as the KalmTouch calendar/email account
+(approve Calendar, Gmail send, Drive, and Sheets):
 
 ${authorizeUrl}
 
