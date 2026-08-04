@@ -9,6 +9,7 @@ import {
   type BookingMode,
 } from "@/lib/calendar/config";
 import SelectDropdown from "@/app/select-dropdown";
+import IntakeForm, { type IntakeBookingContext } from "@/app/intake-form";
 import { SELECT_SERVICE_EVENT } from "@/app/book-service-link";
 import { formatMessage } from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/locale-provider";
@@ -107,6 +108,8 @@ export default function BookingForm() {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
+  const [intakeBooking, setIntakeBooking] =
+    useState<IntakeBookingContext | null>(null);
 
   async function loadAvailability() {
     setLoading(true);
@@ -228,6 +231,7 @@ export default function BookingForm() {
     setNotes("");
     setError(null);
     setSuccess(null);
+    setIntakeBooking(null);
   }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -262,7 +266,12 @@ export default function BookingForm() {
       });
       const data = (await response.json()) as {
         error?: string;
-        booking?: { serviceName: string; start: string; mode: BookingMode };
+        booking?: {
+          eventId: string;
+          serviceName: string;
+          start: string;
+          mode: BookingMode;
+        };
       };
 
       if (!response.ok) {
@@ -280,20 +289,36 @@ export default function BookingForm() {
         data.booking?.serviceName ??
         copy.bookedYourSession;
 
+      let bookingSuccessMessage: string;
       if (mode === "on-demand") {
         const prefix = booked
           ? formatMessage(copy.requestSentFor, { label: booked.label })
           : copy.requestSent;
-        setSuccess(
-          `${prefix}. ${formatMessage(copy.confirmEmail, { email })}`,
-        );
+        bookingSuccessMessage = `${prefix}. ${formatMessage(copy.confirmEmail, { email })}`;
       } else {
-        setSuccess(
-          `${formatMessage(copy.booked, { service: serviceLabel })}${
-            booked ? ` — ${booked.label}` : ""
-          }. ${formatMessage(copy.inviteOnWay, { email })}`,
-        );
+        bookingSuccessMessage = `${formatMessage(copy.booked, { service: serviceLabel })}${
+          booked ? ` — ${booked.label}` : ""
+        }. ${formatMessage(copy.inviteOnWay, { email })}`;
       }
+
+      const eventId = data.booking?.eventId;
+      if (eventId) {
+        setIntakeBooking({
+          eventId,
+          name: name.trim(),
+          email: email.trim(),
+          address: address.trim(),
+          phone: phone.trim(),
+          serviceName: serviceLabel,
+          appointmentStart: data.booking?.start ?? selectedStart,
+          appointmentLabel: booked?.label ?? serviceLabel,
+          bookingSuccessMessage,
+        });
+        setSuccess(null);
+      } else {
+        setSuccess(bookingSuccessMessage);
+      }
+
       setName("");
       setEmail("");
       setAddress("");
@@ -337,6 +362,33 @@ export default function BookingForm() {
           </a>
           {parts[2]}
         </p>
+      </div>
+    );
+  }
+
+  if (intakeBooking) {
+    return (
+      <IntakeForm
+        booking={intakeBooking}
+        onComplete={(message) => {
+          setIntakeBooking(null);
+          setSuccess(message);
+        }}
+      />
+    );
+  }
+
+  if (success) {
+    return (
+      <div id="book" className="flex flex-col gap-4">
+        <p className="text-sm text-accent-deep">{success}</p>
+        <button
+          type="button"
+          onClick={resetBooking}
+          className="w-fit rounded-md border border-stone bg-white/80 px-6 py-3 text-sm font-medium text-foreground transition hover:border-accent"
+        >
+          {copy.reset}
+        </button>
       </div>
     );
   }

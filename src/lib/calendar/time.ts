@@ -69,6 +69,29 @@ export function formatTimeInZone(
   }).format(date);
 }
 
+/** Human-readable date + time in the booking timezone, e.g. "Aug 3, 2026, 6:30 PM". */
+export function formatHumanDateTime(
+  date: Date | string,
+  locale: "en" | "fr" = "en",
+  timeZone: string = BOOKING_TIMEZONE,
+): string {
+  const value = typeof date === "string" ? new Date(date) : date;
+  if (Number.isNaN(value.getTime())) {
+    return typeof date === "string" ? date : "";
+  }
+
+  return new Intl.DateTimeFormat(locale === "fr" ? "fr-CA" : "en-US", {
+    timeZone,
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(value);
+}
+
 export function weekdayInZone(
   date: Date,
   timeZone: string = BOOKING_TIMEZONE,

@@ -131,6 +131,56 @@ export type Messages = {
     reset: string;
     orCall: string;
   };
+  intake: {
+    title: string;
+    intro: string;
+    consent: string;
+    privacyLink: string;
+    bookingSummary: string;
+    bodyMap: string;
+    front: string;
+    back: string;
+    legendFocus: string;
+    legendAvoid: string;
+    legendHint: string;
+    painPoints: string;
+    painPointsPlaceholder: string;
+    healthIssues: string;
+    healthIssuesPlaceholder: string;
+    allergies: string;
+    allergiesPlaceholder: string;
+    scentTolerance: string;
+    scentTolerancePlaceholder: string;
+    occupation: string;
+    occupationPlaceholder: string;
+    sports: string;
+    sportsPlaceholder: string;
+    recentSurgery: string;
+    recentSurgeryPlaceholder: string;
+    surgeryDetails: string;
+    surgeryDetailsPlaceholder: string;
+    pregnancy: string;
+    pregnancyPlaceholder: string;
+    pregnancyDuration: string;
+    pregnancyDurationPlaceholder: string;
+    recentMassage: string;
+    recentMassagePlaceholder: string;
+    recentMassageWhen: string;
+    recentMassageWhenPlaceholder: string;
+    recentMassageAreas: string;
+    recentMassageAreasPlaceholder: string;
+    medication: string;
+    medicationPlaceholder: string;
+    other: string;
+    otherPlaceholder: string;
+    submit: string;
+    skip: string;
+    submitting: string;
+    success: string;
+    failed: string;
+    failedRetry: string;
+    continueAnyway: string;
+  };
   contactForm: {
     name: string;
     namePlaceholder: string;
@@ -290,6 +340,60 @@ export const messages: Record<Locale, Messages> = {
       bookAppointment: "Book appointment",
       reset: "Reset",
       orCall: "Or call",
+    },
+    intake: {
+      title: "Health intake (optional)",
+      intro:
+        "Your appointment is booked. Share anything that helps us tailor the session — or send a blank form to finish.",
+      consent:
+        "Health details are stored securely for your therapist on the studio Google account (PDF + client sheet). See our",
+      privacyLink: "Privacy Policy",
+      bookingSummary: "Booked for {label}",
+      bodyMap: "Muscle map — choose Focus or Avoid, then tap muscle groups",
+      front: "Front",
+      back: "Back",
+      legendFocus: "Focus",
+      legendAvoid: "Avoid",
+      legendHint:
+        "Select a mode, then tap muscles on the front or back figure. Switch modes to mark both.",
+      painPoints: "Specific pain points",
+      painPointsPlaceholder: "Where it hurts, and what aggravates it…",
+      healthIssues: "Health concerns",
+      healthIssuesPlaceholder: "Conditions we should know about…",
+      allergies: "Allergies",
+      allergiesPlaceholder: "Oils, latex, metals, etc.",
+      scentTolerance: "Scent tolerance",
+      scentTolerancePlaceholder: "Sensitive to certain oils or fragrances?",
+      occupation: "Occupation",
+      occupationPlaceholder: "Desk work, trades, caregiving…",
+      sports: "Sports / activity",
+      sportsPlaceholder: "Running, gym, yoga…",
+      recentSurgery: "Recent surgery?",
+      recentSurgeryPlaceholder: "Yes / no, and when",
+      surgeryDetails: "Surgery details",
+      surgeryDetailsPlaceholder: "Procedure, restrictions, healing…",
+      pregnancy: "Pregnancy",
+      pregnancyPlaceholder: "Yes / no",
+      pregnancyDuration: "Pregnancy duration",
+      pregnancyDurationPlaceholder: "e.g. 28 weeks",
+      recentMassage: "Recent massage?",
+      recentMassagePlaceholder: "Yes / no",
+      recentMassageWhen: "When",
+      recentMassageWhenPlaceholder: "Approximate date",
+      recentMassageAreas: "Areas massaged",
+      recentMassageAreasPlaceholder: "Back, neck, legs…",
+      medication: "Medication",
+      medicationPlaceholder: "Current medications relevant to massage…",
+      other: "Anything else",
+      otherPlaceholder: "Preferences or details not listed above…",
+      submit: "Submit form",
+      skip: "Skip / send empty",
+      submitting: "Saving…",
+      success: "Thank you — your intake was saved with the booking.",
+      failed: "Could not save the health form.",
+      failedRetry:
+        "Your booking is still confirmed, but the health form could not be saved. Please contact us.",
+      continueAnyway: "Continue",
     },
     contactForm: {
       name: "Name",
@@ -453,6 +557,60 @@ export const messages: Record<Locale, Messages> = {
       bookAppointment: "Réserver le rendez-vous",
       reset: "Réinitialiser",
       orCall: "Ou appelez",
+    },
+    intake: {
+      title: "Fiche santé (facultatif)",
+      intro:
+        "Votre rendez-vous est enregistré. Indiquez ce qui peut aider à adapter la séance — ou envoyez le formulaire vide pour terminer.",
+      consent:
+        "Les détails de santé sont conservés de façon sécurisée pour votre thérapeute sur le compte Google du studio (PDF + feuille clients). Voir notre",
+      privacyLink: "politique de confidentialité",
+      bookingSummary: "Réservé pour {label}",
+      bodyMap: "Carte musculaire — choisissez Insister ou Éviter, puis touchez les groupes",
+      front: "Avant",
+      back: "Arrière",
+      legendFocus: "Insister",
+      legendAvoid: "Éviter",
+      legendHint:
+        "Choisissez un mode, puis touchez les muscles sur la vue avant ou arrière. Changez de mode pour marquer les deux.",
+      painPoints: "Points de douleur spécifiques",
+      painPointsPlaceholder: "Où ça fait mal, et ce qui aggrave…",
+      healthIssues: "Problèmes de santé",
+      healthIssuesPlaceholder: "Conditions à connaître…",
+      allergies: "Allergies",
+      allergiesPlaceholder: "Huiles, latex, métaux, etc.",
+      scentTolerance: "Tolérance aux odeurs",
+      scentTolerancePlaceholder: "Sensible à certaines huiles ou fragrances?",
+      occupation: "Occupation",
+      occupationPlaceholder: "Bureau, métiers, soins…",
+      sports: "Sport pratiqué",
+      sportsPlaceholder: "Course, gym, yoga…",
+      recentSurgery: "Chirurgie récente?",
+      recentSurgeryPlaceholder: "Oui / non, et quand",
+      surgeryDetails: "Détails de la chirurgie",
+      surgeryDetailsPlaceholder: "Intervention, restrictions, guérison…",
+      pregnancy: "Grossesse",
+      pregnancyPlaceholder: "Oui / non",
+      pregnancyDuration: "Durée de grossesse",
+      pregnancyDurationPlaceholder: "ex. 28 semaines",
+      recentMassage: "Massage récent?",
+      recentMassagePlaceholder: "Oui / non",
+      recentMassageWhen: "Quand",
+      recentMassageWhenPlaceholder: "Date approximative",
+      recentMassageAreas: "Parties du corps",
+      recentMassageAreasPlaceholder: "Dos, cou, jambes…",
+      medication: "Médication",
+      medicationPlaceholder: "Médicaments pertinents pour le massage…",
+      other: "Autre",
+      otherPlaceholder: "Préférences ou détails absents de la liste…",
+      submit: "Envoyer le formulaire",
+      skip: "Passer / envoyer vide",
+      submitting: "Enregistrement…",
+      success: "Merci — votre fiche a été enregistrée avec la réservation.",
+      failed: "Impossible d’enregistrer la fiche santé.",
+      failedRetry:
+        "Votre réservation est toujours confirmée, mais la fiche santé n’a pas pu être enregistrée. Contactez-nous.",
+      continueAnyway: "Continuer",
     },
     contactForm: {
       name: "Nom",

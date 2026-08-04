@@ -24,7 +24,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
     backHome: "Back to home",
     privacy: {
       title: "Privacy Policy",
-      lastUpdated: "Last updated: July 27, 2026",
+      lastUpdated: "Last updated: August 3, 2026",
       intro:
         "KalmTouch Massage (“KalmTouch,” “we,” “us,” or “our”) respects your privacy. This policy explains what personal information we collect through www.kalmtouch.ca (the “Site”), how we use it, and the choices you have. We operate as an on-site massage service in the Ottawa/Gatineau area.",
       sections: [
@@ -35,6 +35,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           ],
           bullets: [
             "Booking: name, email address, phone number, service address, appointment details, and any notes you provide (for example building access or preferences).",
+            "Health intake (optional, after booking): pain areas, health concerns, allergies, scent tolerance, occupation, sports, recent surgery, pregnancy details, recent massage history, medication, and other notes you choose to share, including selections on a body map. You may submit an empty form.",
             "Contact form: name, email address, subject, and message.",
             "Language preference: stored in your browser’s local storage so the Site can remember English or French.",
           ],
@@ -44,6 +45,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           paragraphs: ["We use your information to:"],
           bullets: [
             "Schedule, confirm, and deliver on-site massage appointments.",
+            "Prepare a safe, tailored massage using health intake details you provide.",
             "Send calendar invites and booking-related emails.",
             "Respond to inquiries and provide customer support.",
             "Operate and improve the Site’s language experience.",
@@ -56,6 +58,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           ],
           bullets: [
             "Google Calendar and Gmail: booking details and contact messages may be processed through Google services we use to manage appointments and email.",
+            "Google Drive and Google Sheets: optional health intake forms are stored as PDF files in the studio Drive and summarized (name, phone, address, email, booking id, and Drive link) in a studio Google Sheet for session preparation.",
             "Service providers who help us host or operate the Site, under obligations to protect your information.",
             "When required by law, or to protect the safety, rights, or property of KalmTouch, our clients, or others.",
           ],
@@ -69,19 +72,19 @@ export const legalCopy: Record<Locale, LegalCopy> = {
         {
           title: "Retention",
           paragraphs: [
-            "We keep booking and contact information for as long as needed to provide services, follow up on appointments, meet legal or accounting needs, and resolve disputes. You may ask us to delete information we no longer need to keep.",
+            "We keep booking, contact, and health intake information for as long as needed to provide services, follow up on appointments, meet legal or accounting needs, and resolve disputes. You may ask us to delete information we no longer need to keep.",
           ],
         },
         {
           title: "Your choices and rights",
           paragraphs: [
-            "Depending on applicable Canadian privacy law (including PIPEDA and, where relevant, provincial rules), you may request access to, correction of, or deletion of personal information we hold about you. To make a request, email us at the address below. We may need to verify your identity before responding.",
+            "Depending on applicable Canadian privacy law (including PIPEDA and, where relevant, provincial rules), you may request access to, correction of, or deletion of personal information we hold about you. To make a request, email us at the address below. We may need to verify your identity before responding. Completing the health intake is optional; skipping it does not cancel your booking.",
           ],
         },
         {
           title: "Security",
           paragraphs: [
-            "We take reasonable administrative and technical steps to protect personal information. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.",
+            "We take reasonable administrative and technical steps to protect personal information, including limiting health intake files to the studio Google account. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.",
           ],
         },
         {
@@ -220,7 +223,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
     backHome: "Retour à l’accueil",
     privacy: {
       title: "Politique de confidentialité",
-      lastUpdated: "Dernière mise à jour : 27 juillet 2026",
+      lastUpdated: "Dernière mise à jour : 3 août 2026",
       intro:
         "KalmTouch Massage (« KalmTouch », « nous » ou « notre ») respecte votre vie privée. Cette politique explique quels renseignements personnels nous recueillons via www.kalmtouch.ca (le « Site »), comment nous les utilisons et quels choix vous avez. Nous offrons un service de massage à domicile dans la région d’Ottawa/Gatineau.",
       sections: [
@@ -231,6 +234,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           ],
           bullets: [
             "Réservation : nom, adresse courriel, numéro de téléphone, adresse du service, détails du rendez-vous et toute note que vous fournissez (par exemple accès à l’immeuble ou préférences).",
+            "Fiche santé (facultative, après la réservation) : zones de douleur, problèmes de santé, allergies, tolérance aux odeurs, occupation, sports, chirurgie récente, détails de grossesse, historique de massage récent, médication et autres notes que vous choisissez de partager, y compris des sélections sur un schéma du corps. Vous pouvez envoyer un formulaire vide.",
             "Formulaire de contact : nom, adresse courriel, objet et message.",
             "Préférence de langue : stockée dans le stockage local de votre navigateur pour que le Site se souvienne de l’anglais ou du français.",
           ],
@@ -240,6 +244,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           paragraphs: ["Nous utilisons vos renseignements pour :"],
           bullets: [
             "Planifier, confirmer et offrir les rendez-vous de massage à domicile.",
+            "Préparer un massage sécuritaire et adapté grâce aux détails de la fiche santé que vous fournissez.",
             "Envoyer des invitations calendrier et des courriels liés aux réservations.",
             "Répondre aux demandes et offrir du soutien à la clientèle.",
             "Assurer et améliorer l’expérience linguistique du Site.",
@@ -252,6 +257,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           ],
           bullets: [
             "Google Calendar et Gmail : les détails de réservation et les messages de contact peuvent être traités via les services Google que nous utilisons pour gérer les rendez-vous et le courriel.",
+            "Google Drive et Google Sheets : les fiches santé facultatives sont enregistrées en PDF dans le Drive du studio et résumées (nom, téléphone, adresse, courriel, id de réservation et lien Drive) dans une feuille Google du studio pour préparer la séance.",
             "Fournisseurs qui nous aident à héberger ou à faire fonctionner le Site, sous obligation de protéger vos renseignements.",
             "Lorsque la loi l’exige, ou pour protéger la sécurité, les droits ou les biens de KalmTouch, de nos clients ou d’autrui.",
           ],
@@ -265,19 +271,19 @@ export const legalCopy: Record<Locale, LegalCopy> = {
         {
           title: "Conservation",
           paragraphs: [
-            "Nous conservons les renseignements de réservation et de contact aussi longtemps que nécessaire pour fournir les services, assurer le suivi des rendez-vous, respecter des obligations légales ou comptables, et résoudre des différends. Vous pouvez nous demander de supprimer des renseignements que nous n’avons plus besoin de conserver.",
+            "Nous conservons les renseignements de réservation, de contact et de fiche santé aussi longtemps que nécessaire pour fournir les services, assurer le suivi des rendez-vous, respecter des obligations légales ou comptables, et résoudre des différends. Vous pouvez nous demander de supprimer des renseignements que nous n’avons plus besoin de conserver.",
           ],
         },
         {
           title: "Vos choix et droits",
           paragraphs: [
-            "Selon les lois canadiennes applicables en matière de protection de la vie privée (y compris la LPRPDE et, le cas échéant, les règles provinciales), vous pouvez demander l’accès, la correction ou la suppression des renseignements personnels que nous détenons à votre sujet. Pour faire une demande, écrivez-nous à l’adresse ci-dessous. Nous pourrons devoir vérifier votre identité avant de répondre.",
+            "Selon les lois canadiennes applicables en matière de protection de la vie privée (y compris la LPRPDE et, le cas échéant, les règles provinciales), vous pouvez demander l’accès, la correction ou la suppression des renseignements personnels que nous détenons à votre sujet. Pour faire une demande, écrivez-nous à l’adresse ci-dessous. Nous pourrons devoir vérifier votre identité avant de répondre. Remplir la fiche santé est facultatif; la passer n’annule pas votre réservation.",
           ],
         },
         {
           title: "Sécurité",
           paragraphs: [
-            "Nous prenons des mesures administratives et techniques raisonnables pour protéger les renseignements personnels. Aucune méthode de transmission ou de stockage n’est totalement sécurisée; nous ne pouvons donc pas garantir une sécurité absolue.",
+            "Nous prenons des mesures administratives et techniques raisonnables pour protéger les renseignements personnels, y compris en limitant les fiches santé au compte Google du studio. Aucune méthode de transmission ou de stockage n’est totalement sécurisée; nous ne pouvons donc pas garantir une sécurité absolue.",
           ],
         },
         {
