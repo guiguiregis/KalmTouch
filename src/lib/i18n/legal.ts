@@ -58,7 +58,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           ],
           bullets: [
             "Google Calendar and Gmail: booking details and contact messages may be processed through Google services we use to manage appointments and email.",
-            "Google Drive and Google Sheets: optional health intake forms are stored as PDF files in the studio Drive and summarized (name, phone, address, email, booking id, and Drive link) in a studio Google Sheet for session preparation.",
+            "Google Drive, Google Sheets, and Gmail: optional health intake forms are stored as PDF files in the studio Drive, summarized (name, phone, address, email, booking id, and Drive link) in a studio Google Sheet for session preparation, and a PDF copy is emailed to the address you provide.",
             "Service providers who help us host or operate the Site, under obligations to protect your information.",
             "When required by law, or to protect the safety, rights, or property of KalmTouch, our clients, or others.",
           ],
@@ -257,7 +257,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           ],
           bullets: [
             "Google Calendar et Gmail : les détails de réservation et les messages de contact peuvent être traités via les services Google que nous utilisons pour gérer les rendez-vous et le courriel.",
-            "Google Drive et Google Sheets : les fiches santé facultatives sont enregistrées en PDF dans le Drive du studio et résumées (nom, téléphone, adresse, courriel, id de réservation et lien Drive) dans une feuille Google du studio pour préparer la séance.",
+            "Google Drive, Google Sheets et Gmail : les fiches santé facultatives sont enregistrées en PDF dans le Drive du studio, résumées (nom, téléphone, adresse, courriel, id de réservation et lien Drive) dans une feuille Google du studio pour préparer la séance, et une copie PDF est envoyée à l’adresse courriel que vous fournissez.",
             "Fournisseurs qui nous aident à héberger ou à faire fonctionner le Site, sous obligation de protéger vos renseignements.",
             "Lorsque la loi l’exige, ou pour protéger la sécurité, les droits ou les biens de KalmTouch, de nos clients ou d’autrui.",
           ],

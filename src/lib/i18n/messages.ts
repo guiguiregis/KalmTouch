@@ -33,6 +33,8 @@ export type Messages = {
     getInTouch: string;
     bookNow: string;
     duration: string;
+    price: string;
+    insuranceReceipt: string;
   };
   serviceDetails: Record<
     string,
@@ -130,6 +132,7 @@ export type Messages = {
     bookAppointment: string;
     reset: string;
     orCall: string;
+    insuranceReceipt: string;
   };
   intake: {
     title: string;
@@ -177,6 +180,7 @@ export type Messages = {
     skip: string;
     submitting: string;
     success: string;
+    successEmailed: string;
     failed: string;
     failedRetry: string;
     continueAnyway: string;
@@ -230,6 +234,9 @@ export const messages: Record<Locale, Messages> = {
       getInTouch: "Get in touch",
       bookNow: "Book now",
       duration: "{minutes} min",
+      price: "${price} CAD",
+      insuranceReceipt:
+        "A receipt or invoice is available for insurance purposes.",
     },
     serviceDetails: {
       swedish: {
@@ -340,13 +347,15 @@ export const messages: Record<Locale, Messages> = {
       bookAppointment: "Book appointment",
       reset: "Reset",
       orCall: "Or call",
+      insuranceReceipt:
+        "A receipt or invoice is available for insurance purposes.",
     },
     intake: {
       title: "Health intake (optional)",
       intro:
         "Your appointment is booked. Share anything that helps us tailor the session — or send a blank form to finish.",
       consent:
-        "Health details are stored securely for your therapist on the studio Google account (PDF + client sheet). See our",
+        "Health details are stored securely for your therapist on the studio Google account (PDF + client sheet), and a PDF copy is emailed to you. See our",
       privacyLink: "Privacy Policy",
       bookingSummary: "Booked for {label}",
       bodyMap: "Muscle map — choose Focus or Avoid, then tap muscle groups",
@@ -390,6 +399,8 @@ export const messages: Record<Locale, Messages> = {
       skip: "Skip / send empty",
       submitting: "Saving…",
       success: "Thank you — your intake was saved with the booking.",
+      successEmailed:
+        "Thank you — your intake was saved with the booking, and a PDF copy was emailed to you.",
       failed: "Could not save the health form.",
       failedRetry:
         "Your booking is still confirmed, but the health form could not be saved. Please contact us.",
@@ -443,6 +454,9 @@ export const messages: Record<Locale, Messages> = {
       getInTouch: "Écrivez-nous",
       bookNow: "Réserver",
       duration: "{minutes} min",
+      price: "{price} $ CAD",
+      insuranceReceipt:
+        "Une facture ou un reçu est disponible à des fins d’assurance.",
     },
     serviceDetails: {
       swedish: {
@@ -557,13 +571,15 @@ export const messages: Record<Locale, Messages> = {
       bookAppointment: "Réserver le rendez-vous",
       reset: "Réinitialiser",
       orCall: "Ou appelez",
+      insuranceReceipt:
+        "Une facture ou un reçu est disponible à des fins d’assurance.",
     },
     intake: {
       title: "Fiche santé (facultatif)",
       intro:
         "Votre rendez-vous est enregistré. Indiquez ce qui peut aider à adapter la séance — ou envoyez le formulaire vide pour terminer.",
       consent:
-        "Les détails de santé sont conservés de façon sécurisée pour votre thérapeute sur le compte Google du studio (PDF + feuille clients). Voir notre",
+        "Les détails de santé sont conservés de façon sécurisée pour votre thérapeute sur le compte Google du studio (PDF + feuille clients), et une copie PDF vous est envoyée par courriel. Voir notre",
       privacyLink: "politique de confidentialité",
       bookingSummary: "Réservé pour {label}",
       bodyMap: "Carte musculaire — choisissez Insister ou Éviter, puis touchez les groupes",
@@ -607,6 +623,8 @@ export const messages: Record<Locale, Messages> = {
       skip: "Passer / envoyer vide",
       submitting: "Enregistrement…",
       success: "Merci — votre fiche a été enregistrée avec la réservation.",
+      successEmailed:
+        "Merci — votre fiche a été enregistrée avec la réservation, et une copie PDF vous a été envoyée par courriel.",
       failed: "Impossible d’enregistrer la fiche santé.",
       failedRetry:
         "Votre réservation est toujours confirmée, mais la fiche santé n’a pas pu être enregistrée. Contactez-nous.",

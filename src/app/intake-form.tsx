@@ -115,14 +115,20 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = (await response.json()) as { error?: string };
+      const data = (await response.json()) as {
+        error?: string;
+        intake?: { emailedCopy?: boolean };
+      };
 
       if (!response.ok) {
         setError(data.error || copy.failedRetry);
         return;
       }
 
-      onComplete(`${booking.bookingSuccessMessage} ${copy.success}`);
+      const intakeSuccess = data.intake?.emailedCopy
+        ? copy.successEmailed
+        : copy.success;
+      onComplete(`${booking.bookingSuccessMessage} ${intakeSuccess}`);
     } catch {
       setError(copy.failedRetry);
     } finally {

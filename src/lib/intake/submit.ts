@@ -1,7 +1,9 @@
 import { getCalendarClient, getCalendarId } from "@/lib/calendar/client";
 import { formatHumanDateTime } from "@/lib/calendar/time";
 import { uploadPdfToDrive, isDriveConfigured } from "@/lib/drive/upload";
+import { isEmailConfigured } from "@/lib/email/send";
 import { appendClientRow, isSheetsConfigured } from "@/lib/sheets/append";
+import { sendIntakeCopyToClient } from "./email-copy";
 import { generateIntakePdf, intakePdfFilename } from "./pdf";
 import { IntakeError, type ParsedIntake } from "./schema";
 
@@ -52,6 +54,7 @@ async function attachDriveLinkToCalendarEvent(
 export type IntakeSubmitResult = {
   driveLink: string;
   formStatus: "filled" | "empty";
+  emailedCopy: boolean;
 };
 
 export async function submitIntake(
@@ -93,8 +96,23 @@ export async function submitIntake(
     console.error("intake calendar patch failed", error);
   }
 
+  let emailedCopy = false;
+  if (isEmailConfigured()) {
+    try {
+      await sendIntakeCopyToClient({
+        intake,
+        filename,
+        pdf: pdfBuffer,
+      });
+      emailedCopy = true;
+    } catch (error) {
+      console.error("intake client copy email failed", error);
+    }
+  }
+
   return {
     driveLink: uploaded.webViewLink,
     formStatus: intake.formStatus,
+    emailedCopy,
   };
 }

@@ -43,6 +43,7 @@ export const BOOKING_SERVICES = [
     id: "swedish",
     name: "Swedish Massage",
     duration: SESSION_MINUTES,
+    priceCad: 100,
     description:
       "Long, flowing strokes to ease everyday tension and quiet the nervous system.",
   },
@@ -50,6 +51,7 @@ export const BOOKING_SERVICES = [
     id: "deep-tissue",
     name: "Deep Tissue",
     duration: SESSION_MINUTES,
+    priceCad: 120,
     description:
       "Slower pressure for stubborn knots, posture strain, and lasting tightness.",
   },

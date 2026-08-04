@@ -26,6 +26,14 @@ function encodeSubject(subject: string): string {
   return `=?UTF-8?B?${Buffer.from(subject, "utf8").toString("base64")}?=`;
 }
 
+function toBase64Url(value: string | Buffer): string {
+  const base64 =
+    typeof value === "string"
+      ? Buffer.from(value, "utf8").toString("base64")
+      : value.toString("base64");
+  return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
 function buildRawMessage(input: {
   to: string;
   from: string;
@@ -45,11 +53,81 @@ function buildRawMessage(input: {
     input.text,
   ];
 
-  return Buffer.from(lines.join("\r\n"), "utf8")
+  return toBase64Url(lines.join("\r\n"));
+}
+
+function buildRawMessageWithPdf(input: {
+  to: string;
+  from: string;
+  replyTo?: string;
+  subject: string;
+  text: string;
+  filename: string;
+  pdf: Buffer;
+}): string {
+  const boundary = `kalmtouch_${Date.now().toString(16)}`;
+  const safeFilename = input.filename.replace(/[^\w.\-]+/g, "_");
+  const pdfBase64 = input.pdf
     .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
+    .replace(/(.{76})/g, "$1\r\n");
+
+  const lines = [
+    `To: ${input.to}`,
+    `From: ${input.from}`,
+    ...(input.replyTo ? [`Reply-To: ${input.replyTo}`] : []),
+    `Subject: ${encodeSubject(input.subject)}`,
+    "MIME-Version: 1.0",
+    `Content-Type: multipart/mixed; boundary="${boundary}"`,
+    "",
+    `--${boundary}`,
+    'Content-Type: text/plain; charset="UTF-8"',
+    "Content-Transfer-Encoding: 7bit",
+    "",
+    input.text,
+    "",
+    `--${boundary}`,
+    `Content-Type: application/pdf; name="${safeFilename}"`,
+    "Content-Transfer-Encoding: base64",
+    `Content-Disposition: attachment; filename="${safeFilename}"`,
+    "",
+    pdfBase64,
+    `--${boundary}--`,
+    "",
+  ];
+
+  return toBase64Url(lines.join("\r\n"));
+}
+
+export async function sendPdfEmail(input: {
+  to: string;
+  subject: string;
+  text: string;
+  filename: string;
+  pdf: Buffer;
+}): Promise<void> {
+  const to = input.to.trim().toLowerCase();
+  if (!to || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+    throw new ContactError("Enter a valid email address.", 400);
+  }
+
+  const from =
+    process.env.GOOGLE_SENDER_EMAIL?.trim() || getContactToEmail();
+  const client = gmail({ version: "v1", auth: getOAuth2Client() });
+
+  await client.users.messages.send({
+    userId: "me",
+    requestBody: {
+      raw: buildRawMessageWithPdf({
+        to,
+        from,
+        replyTo: from,
+        subject: input.subject,
+        text: input.text,
+        filename: input.filename,
+        pdf: input.pdf,
+      }),
+    },
+  });
 }
 
 export async function sendContactEmail(

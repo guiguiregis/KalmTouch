@@ -440,9 +440,11 @@ export default function BookingForm() {
           options={BOOKING_SERVICES.map((service) => ({
             value: service.id,
             label: t.serviceDetails[service.id]?.name ?? service.name,
-            description: formatMessage(t.services.duration, {
+            description: `${formatMessage(t.services.price, {
+              price: service.priceCad,
+            })} · ${formatMessage(t.services.duration, {
               minutes: service.duration,
-            }),
+            })}`,
           }))}
         />
         {selectedServiceCopy ? (
@@ -674,6 +676,8 @@ export default function BookingForm() {
           {copy.reset}
         </button>
       </div>
+
+      <p className="text-sm text-muted">{copy.insuranceReceipt}</p>
 
       <p className="text-sm text-muted">
         {copy.orCall}{" "}
