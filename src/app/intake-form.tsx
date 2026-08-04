@@ -4,6 +4,11 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import BodyMap, { type BodyMapHandle } from "@/app/body-map";
 import type { BodyRegionSelection } from "@/lib/intake/regions";
+import {
+  CONTRAINDICATION_IDS,
+  type ContraindicationId,
+  type PressureOption,
+} from "@/lib/intake/schema";
 import { formatMessage } from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/locale-provider";
 
@@ -34,12 +39,16 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
   const copy = t.intake;
 
   const [bodyRegions, setBodyRegions] = useState<BodyRegionSelection[]>([]);
+  const [preferredPressure, setPreferredPressure] = useState<"" | PressureOption>("");
   const [painPoints, setPainPoints] = useState("");
+  const [nerveSymptoms, setNerveSymptoms] = useState("");
   const [healthIssues, setHealthIssues] = useState("");
   const [allergies, setAllergies] = useState("");
   const [scentTolerance, setScentTolerance] = useState("");
   const [occupation, setOccupation] = useState("");
   const [sports, setSports] = useState("");
+  const [recentInjury, setRecentInjury] = useState("");
+  const [recentInjuryDetails, setRecentInjuryDetails] = useState("");
   const [recentSurgery, setRecentSurgery] = useState("");
   const [surgeryDetails, setSurgeryDetails] = useState("");
   const [pregnancy, setPregnancy] = useState("");
@@ -48,14 +57,75 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
   const [recentMassageWhen, setRecentMassageWhen] = useState("");
   const [recentMassageAreas, setRecentMassageAreas] = useState("");
   const [medication, setMedication] = useState("");
+  const [contraindications, setContraindications] = useState<
+    ContraindicationId[]
+  >([]);
+  const [drapingPreferences, setDrapingPreferences] = useState("");
+  const [homeAccess, setHomeAccess] = useState("");
+  const [emergencyContactName, setEmergencyContactName] = useState("");
+  const [emergencyContactPhone, setEmergencyContactPhone] = useState("");
   const [other, setOther] = useState("");
+  const [informedConsent, setInformedConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const bodyMapRef = useRef<BodyMapHandle>(null);
 
+  const contraindicationLabels: Record<ContraindicationId, string> = {
+    highBloodPressure: copy.contraindicationHighBloodPressure,
+    bloodClot: copy.contraindicationBloodClot,
+    skinInfection: copy.contraindicationSkinInfection,
+    fever: copy.contraindicationFever,
+    cancerTreatment: copy.contraindicationCancerTreatment,
+  };
+
+  function toggleContraindication(id: ContraindicationId) {
+    setContraindications((current) =>
+      current.includes(id)
+        ? current.filter((item) => item !== id)
+        : [...current, id],
+    );
+  }
+
+  function hasFormContent() {
+    if (bodyRegions.length > 0) return true;
+    if (preferredPressure) return true;
+    if (contraindications.length > 0) return true;
+    if (informedConsent) return true;
+    return [
+      painPoints,
+      nerveSymptoms,
+      healthIssues,
+      allergies,
+      scentTolerance,
+      occupation,
+      sports,
+      recentInjury,
+      recentInjuryDetails,
+      recentSurgery,
+      surgeryDetails,
+      pregnancy,
+      pregnancyDuration,
+      recentMassage,
+      recentMassageWhen,
+      recentMassageAreas,
+      medication,
+      drapingPreferences,
+      homeAccess,
+      emergencyContactName,
+      emergencyContactPhone,
+      other,
+    ].some((value) => value.trim().length > 0);
+  }
+
   async function send(skipped: boolean) {
     setSubmitting(true);
     setError(null);
+
+    if (!skipped && hasFormContent() && !informedConsent) {
+      setError(copy.consentRequired);
+      setSubmitting(false);
+      return;
+    }
 
     let bodyMapImage: string | undefined;
     if (!skipped && bodyRegions.length > 0) {
@@ -91,12 +161,16 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
           locale,
           bodyRegions,
           bodyMapImage,
+          preferredPressure,
           painPoints,
+          nerveSymptoms,
           healthIssues,
           allergies,
           scentTolerance,
           occupation,
           sports,
+          recentInjury,
+          recentInjuryDetails,
           recentSurgery,
           surgeryDetails,
           pregnancy,
@@ -105,7 +179,13 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
           recentMassageWhen,
           recentMassageAreas,
           medication,
+          contraindications,
+          drapingPreferences,
+          homeAccess,
+          emergencyContactName,
+          emergencyContactPhone,
           other,
+          informedConsent,
           skipped: false,
         };
 
@@ -194,6 +274,38 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
         />
       </fieldset>
 
+      <fieldset className="flex flex-col gap-2">
+        <legend className="text-sm font-medium text-foreground">
+          {copy.preferredPressure}
+        </legend>
+        <div className="flex flex-wrap gap-2">
+          {(
+            [
+              ["light", copy.pressureLight],
+              ["medium", copy.pressureMedium],
+              ["firm", copy.pressureFirm],
+            ] as const
+          ).map(([value, label]) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() =>
+                setPreferredPressure((current) =>
+                  current === value ? "" : value,
+                )
+              }
+              className={`rounded-md border px-4 py-2 text-sm transition ${
+                preferredPressure === value
+                  ? "border-accent bg-accent text-white"
+                  : "border-stone bg-white/80 text-foreground hover:border-accent"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
       <label className="flex flex-col gap-1.5 text-sm font-medium">
         {copy.painPoints}
         <textarea
@@ -201,6 +313,15 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
           value={painPoints}
           onChange={(e) => setPainPoints(e.target.value)}
           placeholder={copy.painPointsPlaceholder}
+        />
+      </label>
+      <label className="flex flex-col gap-1.5 text-sm font-medium">
+        {copy.nerveSymptoms}
+        <textarea
+          className={textareaClass}
+          value={nerveSymptoms}
+          onChange={(e) => setNerveSymptoms(e.target.value)}
+          placeholder={copy.nerveSymptomsPlaceholder}
         />
       </label>
       <label className="flex flex-col gap-1.5 text-sm font-medium">
@@ -248,6 +369,24 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
             value={sports}
             onChange={(e) => setSports(e.target.value)}
             placeholder={copy.sportsPlaceholder}
+          />
+        </label>
+        <label className="flex flex-col gap-1.5 text-sm font-medium">
+          {copy.recentInjury}
+          <input
+            className={inputClass}
+            value={recentInjury}
+            onChange={(e) => setRecentInjury(e.target.value)}
+            placeholder={copy.recentInjuryPlaceholder}
+          />
+        </label>
+        <label className="flex flex-col gap-1.5 text-sm font-medium">
+          {copy.recentInjuryDetails}
+          <input
+            className={inputClass}
+            value={recentInjuryDetails}
+            onChange={(e) => setRecentInjuryDetails(e.target.value)}
+            placeholder={copy.recentInjuryDetailsPlaceholder}
           />
         </label>
         <label className="flex flex-col gap-1.5 text-sm font-medium">
@@ -324,6 +463,69 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
           placeholder={copy.medicationPlaceholder}
         />
       </label>
+
+      <fieldset className="flex flex-col gap-2">
+        <legend className="text-sm font-medium text-foreground">
+          {copy.contraindications}
+        </legend>
+        <div className="flex flex-col gap-2">
+          {CONTRAINDICATION_IDS.map((id) => (
+            <label
+              key={id}
+              className="flex items-start gap-3 text-sm text-foreground"
+            >
+              <input
+                type="checkbox"
+                checked={contraindications.includes(id)}
+                onChange={() => toggleContraindication(id)}
+                className="mt-1 size-4 accent-[var(--accent)]"
+              />
+              <span>{contraindicationLabels[id]}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <label className="flex flex-col gap-1.5 text-sm font-medium">
+        {copy.drapingPreferences}
+        <textarea
+          className={textareaClass}
+          value={drapingPreferences}
+          onChange={(e) => setDrapingPreferences(e.target.value)}
+          placeholder={copy.drapingPreferencesPlaceholder}
+        />
+      </label>
+      <label className="flex flex-col gap-1.5 text-sm font-medium">
+        {copy.homeAccess}
+        <textarea
+          className={textareaClass}
+          value={homeAccess}
+          onChange={(e) => setHomeAccess(e.target.value)}
+          placeholder={copy.homeAccessPlaceholder}
+        />
+      </label>
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        <label className="flex flex-col gap-1.5 text-sm font-medium">
+          {copy.emergencyContactName}
+          <input
+            className={inputClass}
+            value={emergencyContactName}
+            onChange={(e) => setEmergencyContactName(e.target.value)}
+            placeholder={copy.emergencyContactNamePlaceholder}
+          />
+        </label>
+        <label className="flex flex-col gap-1.5 text-sm font-medium">
+          {copy.emergencyContactPhone}
+          <input
+            className={inputClass}
+            value={emergencyContactPhone}
+            onChange={(e) => setEmergencyContactPhone(e.target.value)}
+            placeholder={copy.emergencyContactPhonePlaceholder}
+          />
+        </label>
+      </div>
+
       <label className="flex flex-col gap-1.5 text-sm font-medium">
         {copy.other}
         <textarea
@@ -332,6 +534,16 @@ export default function IntakeForm({ booking, onComplete }: IntakeFormProps) {
           onChange={(e) => setOther(e.target.value)}
           placeholder={copy.otherPlaceholder}
         />
+      </label>
+
+      <label className="flex items-start gap-3 text-sm text-foreground">
+        <input
+          type="checkbox"
+          checked={informedConsent}
+          onChange={(e) => setInformedConsent(e.target.checked)}
+          className="mt-1 size-4 shrink-0 accent-[var(--accent)]"
+        />
+        <span>{copy.informedConsent}</span>
       </label>
 
       {error ? (

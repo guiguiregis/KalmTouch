@@ -35,7 +35,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           ],
           bullets: [
             "Booking: name, email address, phone number, service address, appointment details, and any notes you provide (for example building access or preferences).",
-            "Health intake (optional, after booking): pain areas, health concerns, allergies, scent tolerance, occupation, sports, recent surgery, pregnancy details, recent massage history, medication, and other notes you choose to share, including selections on a body map. You may submit an empty form.",
+            "Health intake (optional, after booking): preferred pressure, pain areas, nerve symptoms, health concerns, allergies, scent tolerance, occupation, sports, recent injury or surgery, pregnancy details, recent massage history, medication, contraindications, draping and home-access notes, emergency contact, informed consent, and other notes you choose to share, including selections on a body map. You may submit an empty form.",
             "Contact form: name, email address, subject, and message.",
             "Language preference: stored in your browser’s local storage so the Site can remember English or French.",
           ],
@@ -234,7 +234,7 @@ export const legalCopy: Record<Locale, LegalCopy> = {
           ],
           bullets: [
             "Réservation : nom, adresse courriel, numéro de téléphone, adresse du service, détails du rendez-vous et toute note que vous fournissez (par exemple accès à l’immeuble ou préférences).",
-            "Fiche santé (facultative, après la réservation) : zones de douleur, problèmes de santé, allergies, tolérance aux odeurs, occupation, sports, chirurgie récente, détails de grossesse, historique de massage récent, médication et autres notes que vous choisissez de partager, y compris des sélections sur un schéma du corps. Vous pouvez envoyer un formulaire vide.",
+            "Fiche santé (facultative, après la réservation) : pression préférée, zones de douleur, symptômes nerveux, problèmes de santé, allergies, tolérance aux odeurs, occupation, sports, blessure ou chirurgie récente, détails de grossesse, historique de massage récent, médication, contre-indications, préférences de drapage et d’accès au domicile, contact d’urgence, consentement éclairé et autres notes que vous choisissez de partager, y compris des sélections sur un schéma du corps. Vous pouvez envoyer un formulaire vide.",
             "Formulaire de contact : nom, adresse courriel, objet et message.",
             "Préférence de langue : stockée dans le stockage local de votre navigateur pour que le Site se souvienne de l’anglais ou du français.",
           ],

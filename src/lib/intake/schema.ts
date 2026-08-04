@@ -7,13 +7,30 @@ import {
 const MAX_TEXT = 2000;
 const MAX_SHORT = 200;
 
+export const PRESSURE_OPTIONS = ["light", "medium", "firm"] as const;
+export type PressureOption = (typeof PRESSURE_OPTIONS)[number];
+
+export const CONTRAINDICATION_IDS = [
+  "highBloodPressure",
+  "bloodClot",
+  "skinInfection",
+  "fever",
+  "cancerTreatment",
+] as const;
+
+export type ContraindicationId = (typeof CONTRAINDICATION_IDS)[number];
+
 export type IntakeFormFields = {
+  preferredPressure: string;
   painPoints: string;
+  nerveSymptoms: string;
   healthIssues: string;
   allergies: string;
   scentTolerance: string;
   occupation: string;
   sports: string;
+  recentInjury: string;
+  recentInjuryDetails: string;
   recentSurgery: string;
   surgeryDetails: string;
   pregnancy: string;
@@ -22,7 +39,13 @@ export type IntakeFormFields = {
   recentMassageWhen: string;
   recentMassageAreas: string;
   medication: string;
+  contraindications: ContraindicationId[];
+  drapingPreferences: string;
+  homeAccess: string;
+  emergencyContactName: string;
+  emergencyContactPhone: string;
   other: string;
+  informedConsent: boolean;
 };
 
 export type IntakePayload = IntakeFormFields & {
@@ -45,6 +68,7 @@ export type ParsedIntake = IntakePayload & {
 };
 
 const MAX_BODY_MAP_IMAGE = 1_500_000;
+const CONTRAINDICATION_SET = new Set<string>(CONTRAINDICATION_IDS);
 
 function parseBodyMapImage(value: unknown): string | undefined {
   if (typeof value !== "string") return undefined;
@@ -67,6 +91,23 @@ export class IntakeError extends Error {
 function asString(value: unknown, max = MAX_TEXT): string {
   if (typeof value !== "string") return "";
   return value.trim().slice(0, max);
+}
+
+function parsePressure(value: unknown): string {
+  const pressure = asString(value, 16);
+  return PRESSURE_OPTIONS.includes(pressure as PressureOption) ? pressure : "";
+}
+
+function parseContraindications(value: unknown): ContraindicationId[] {
+  if (!Array.isArray(value)) return [];
+  const seen = new Set<ContraindicationId>();
+  for (const item of value) {
+    const id = asString(item, 40);
+    if (CONTRAINDICATION_SET.has(id)) {
+      seen.add(id as ContraindicationId);
+    }
+  }
+  return [...seen];
 }
 
 function parseBodyRegions(value: unknown): BodyRegionSelection[] {
@@ -93,9 +134,23 @@ function parseBodyRegions(value: unknown): BodyRegionSelection[] {
   return regions.slice(0, 64);
 }
 
-function hasAnyContent(fields: IntakeFormFields, regions: BodyRegionSelection[]) {
+function hasAnyContent(
+  fields: IntakeFormFields,
+  regions: BodyRegionSelection[],
+) {
   if (regions.length > 0) return true;
-  return Object.values(fields).some((value) => value.length > 0);
+  if (fields.contraindications.length > 0) return true;
+  if (fields.preferredPressure) return true;
+  if (fields.informedConsent) return true;
+
+  const {
+    contraindications: _c,
+    informedConsent: _i,
+    preferredPressure: _p,
+    ...textFields
+  } = fields;
+
+  return Object.values(textFields).some((value) => value.length > 0);
 }
 
 export function parseIntakePayload(body: unknown): ParsedIntake {
@@ -121,12 +176,16 @@ export function parseIntakePayload(body: unknown): ParsedIntake {
   }
 
   const fields: IntakeFormFields = {
+    preferredPressure: parsePressure(raw.preferredPressure),
     painPoints: asString(raw.painPoints),
+    nerveSymptoms: asString(raw.nerveSymptoms),
     healthIssues: asString(raw.healthIssues),
     allergies: asString(raw.allergies),
     scentTolerance: asString(raw.scentTolerance),
     occupation: asString(raw.occupation, MAX_SHORT),
     sports: asString(raw.sports, MAX_SHORT),
+    recentInjury: asString(raw.recentInjury, MAX_SHORT),
+    recentInjuryDetails: asString(raw.recentInjuryDetails),
     recentSurgery: asString(raw.recentSurgery, MAX_SHORT),
     surgeryDetails: asString(raw.surgeryDetails),
     pregnancy: asString(raw.pregnancy, MAX_SHORT),
@@ -135,13 +194,26 @@ export function parseIntakePayload(body: unknown): ParsedIntake {
     recentMassageWhen: asString(raw.recentMassageWhen, MAX_SHORT),
     recentMassageAreas: asString(raw.recentMassageAreas),
     medication: asString(raw.medication),
+    contraindications: parseContraindications(raw.contraindications),
+    drapingPreferences: asString(raw.drapingPreferences),
+    homeAccess: asString(raw.homeAccess),
+    emergencyContactName: asString(raw.emergencyContactName, MAX_SHORT),
+    emergencyContactPhone: asString(raw.emergencyContactPhone, MAX_SHORT),
     other: asString(raw.other),
+    informedConsent: raw.informedConsent === true,
   };
 
   const bodyRegions = parseBodyRegions(raw.bodyRegions);
   const skipped = raw.skipped === true;
   const formStatus =
     skipped || !hasAnyContent(fields, bodyRegions) ? "empty" : "filled";
+
+  if (!skipped && formStatus === "filled" && !fields.informedConsent) {
+    throw new IntakeError(
+      "Please confirm the informed consent checkbox before submitting.",
+      400,
+    );
+  }
 
   const locale = raw.locale === "fr" ? "fr" : "en";
   const bodyMapImage = parseBodyMapImage(raw.bodyMapImage);

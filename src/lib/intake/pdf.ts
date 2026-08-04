@@ -3,7 +3,42 @@ import PDFDocument from "pdfkit";
 import { formatHumanDateTime } from "@/lib/calendar/time";
 import { SITE } from "@/lib/site";
 import { getRegionLabel, type BodyRegionSelection } from "./regions";
-import type { ParsedIntake } from "./schema";
+import type { ContraindicationId, ParsedIntake } from "./schema";
+
+function pressureLabel(value: string, locale: "en" | "fr"): string {
+  const labels: Record<string, { en: string; fr: string }> = {
+    light: { en: "Light", fr: "Légère" },
+    medium: { en: "Medium", fr: "Moyenne" },
+    firm: { en: "Firm", fr: "Ferme" },
+  };
+  return labels[value]?.[locale] ?? value;
+}
+
+function contraindicationLabel(
+  id: ContraindicationId,
+  locale: "en" | "fr",
+): string {
+  const labels: Record<ContraindicationId, { en: string; fr: string }> = {
+    highBloodPressure: {
+      en: "High blood pressure",
+      fr: "Tension artérielle élevée",
+    },
+    bloodClot: { en: "Blood clot / phlebitis", fr: "Caillot / phlébite" },
+    skinInfection: {
+      en: "Skin infection or open wound",
+      fr: "Infection cutanée ou plaie ouverte",
+    },
+    fever: {
+      en: "Fever or contagious illness",
+      fr: "Fièvre ou maladie contagieuse",
+    },
+    cancerTreatment: {
+      en: "Cancer treatment (current)",
+      fr: "Traitement du cancer (en cours)",
+    },
+  };
+  return labels[id][locale];
+}
 
 const LOGO_PATH = join(process.cwd(), "public/images/kalm-touch-logo.png");
 const LOGO_SIZE = 56;
@@ -172,8 +207,22 @@ export async function generateIntakePdf(
 
     field(
       doc,
+      locale === "fr" ? "Pression préférée" : "Preferred pressure",
+      pressureLabel(intake.preferredPressure, locale),
+      empty,
+    );
+    field(
+      doc,
       locale === "fr" ? "Points de douleur" : "Pain points",
       intake.painPoints,
+      empty,
+    );
+    field(
+      doc,
+      locale === "fr"
+        ? "Douleur, engourdissement ou picotements"
+        : "Pain, numbness, or tingling",
+      intake.nerveSymptoms,
       empty,
     );
     field(
@@ -204,6 +253,18 @@ export async function generateIntakePdf(
       doc,
       locale === "fr" ? "Sport pratiqué" : "Sports / activity",
       intake.sports,
+      empty,
+    );
+    field(
+      doc,
+      locale === "fr" ? "Blessure ou accident récent" : "Recent injury/accident",
+      intake.recentInjury,
+      empty,
+    );
+    field(
+      doc,
+      locale === "fr" ? "Détails de la blessure" : "Injury details",
+      intake.recentInjuryDetails,
       empty,
     );
     field(
@@ -256,8 +317,54 @@ export async function generateIntakePdf(
     );
     field(
       doc,
+      locale === "fr" ? "Contre-indications" : "Contraindications",
+      intake.contraindications
+        .map((id) => contraindicationLabel(id, locale))
+        .join(", "),
+      empty,
+    );
+    field(
+      doc,
+      locale === "fr" ? "Préférences de drapage" : "Draping preferences",
+      intake.drapingPreferences,
+      empty,
+    );
+    field(
+      doc,
+      locale === "fr" ? "Accès au domicile" : "Home access",
+      intake.homeAccess,
+      empty,
+    );
+    field(
+      doc,
+      locale === "fr" ? "Contact d’urgence — nom" : "Emergency contact name",
+      intake.emergencyContactName,
+      empty,
+    );
+    field(
+      doc,
+      locale === "fr"
+        ? "Contact d’urgence — téléphone"
+        : "Emergency contact phone",
+      intake.emergencyContactPhone,
+      empty,
+    );
+    field(
+      doc,
       locale === "fr" ? "Autre" : "Other notes",
       intake.other,
+      empty,
+    );
+    field(
+      doc,
+      locale === "fr" ? "Consentement éclairé" : "Informed consent",
+      intake.informedConsent
+        ? locale === "fr"
+          ? "Accepté"
+          : "Accepted"
+        : locale === "fr"
+          ? "Non fourni"
+          : "Not provided",
       empty,
     );
 

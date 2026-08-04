@@ -146,8 +146,14 @@ export type Messages = {
     legendFocus: string;
     legendAvoid: string;
     legendHint: string;
+    preferredPressure: string;
+    pressureLight: string;
+    pressureMedium: string;
+    pressureFirm: string;
     painPoints: string;
     painPointsPlaceholder: string;
+    nerveSymptoms: string;
+    nerveSymptomsPlaceholder: string;
     healthIssues: string;
     healthIssuesPlaceholder: string;
     allergies: string;
@@ -158,6 +164,10 @@ export type Messages = {
     occupationPlaceholder: string;
     sports: string;
     sportsPlaceholder: string;
+    recentInjury: string;
+    recentInjuryPlaceholder: string;
+    recentInjuryDetails: string;
+    recentInjuryDetailsPlaceholder: string;
     recentSurgery: string;
     recentSurgeryPlaceholder: string;
     surgeryDetails: string;
@@ -174,8 +184,24 @@ export type Messages = {
     recentMassageAreasPlaceholder: string;
     medication: string;
     medicationPlaceholder: string;
+    contraindications: string;
+    contraindicationHighBloodPressure: string;
+    contraindicationBloodClot: string;
+    contraindicationSkinInfection: string;
+    contraindicationFever: string;
+    contraindicationCancerTreatment: string;
+    drapingPreferences: string;
+    drapingPreferencesPlaceholder: string;
+    homeAccess: string;
+    homeAccessPlaceholder: string;
+    emergencyContactName: string;
+    emergencyContactNamePlaceholder: string;
+    emergencyContactPhone: string;
+    emergencyContactPhonePlaceholder: string;
     other: string;
     otherPlaceholder: string;
+    informedConsent: string;
+    consentRequired: string;
     submit: string;
     skip: string;
     submitting: string;
@@ -365,8 +391,15 @@ export const messages: Record<Locale, Messages> = {
       legendAvoid: "Avoid",
       legendHint:
         "Select a mode, then tap muscles on the front or back figure. Switch modes to mark both.",
+      preferredPressure: "Preferred pressure",
+      pressureLight: "Light",
+      pressureMedium: "Medium",
+      pressureFirm: "Firm",
       painPoints: "Specific pain points",
       painPointsPlaceholder: "Where it hurts, and what aggravates it…",
+      nerveSymptoms: "Pain, numbness, or tingling",
+      nerveSymptomsPlaceholder:
+        "Describe symptoms and whether they radiate (e.g. into an arm or leg)…",
       healthIssues: "Health concerns",
       healthIssuesPlaceholder: "Conditions we should know about…",
       allergies: "Allergies",
@@ -377,6 +410,10 @@ export const messages: Record<Locale, Messages> = {
       occupationPlaceholder: "Desk work, trades, caregiving…",
       sports: "Sports / activity",
       sportsPlaceholder: "Running, gym, yoga…",
+      recentInjury: "Recent injury or accident?",
+      recentInjuryPlaceholder: "Yes / no, and roughly when",
+      recentInjuryDetails: "Injury details",
+      recentInjuryDetailsPlaceholder: "Sprain, fall, car accident, restrictions…",
       recentSurgery: "Recent surgery?",
       recentSurgeryPlaceholder: "Yes / no, and when",
       surgeryDetails: "Surgery details",
@@ -393,8 +430,26 @@ export const messages: Record<Locale, Messages> = {
       recentMassageAreasPlaceholder: "Back, neck, legs…",
       medication: "Medication",
       medicationPlaceholder: "Current medications relevant to massage…",
+      contraindications: "Please check any that apply",
+      contraindicationHighBloodPressure: "High blood pressure",
+      contraindicationBloodClot: "Blood clot / phlebitis",
+      contraindicationSkinInfection: "Skin infection or open wound",
+      contraindicationFever: "Fever or contagious illness",
+      contraindicationCancerTreatment: "Cancer treatment (current)",
+      drapingPreferences: "Draping / comfort preferences",
+      drapingPreferencesPlaceholder:
+        "Areas you prefer to keep covered, or are comfortable uncovering…",
+      homeAccess: "Home access notes",
+      homeAccessPlaceholder: "Door code, parking, floor, pets…",
+      emergencyContactName: "Emergency contact name",
+      emergencyContactNamePlaceholder: "Full name",
+      emergencyContactPhone: "Emergency contact phone",
+      emergencyContactPhonePlaceholder: "(555) 555-5555",
       other: "Anything else",
       otherPlaceholder: "Preferences or details not listed above…",
+      informedConsent:
+        "I confirm the information is accurate to the best of my knowledge, and I understand massage does not replace medical advice or treatment.",
+      consentRequired: "Please confirm the consent checkbox to submit the form.",
       submit: "Submit form",
       skip: "Skip / send empty",
       submitting: "Saving…",
@@ -589,8 +644,15 @@ export const messages: Record<Locale, Messages> = {
       legendAvoid: "Éviter",
       legendHint:
         "Choisissez un mode, puis touchez les muscles sur la vue avant ou arrière. Changez de mode pour marquer les deux.",
+      preferredPressure: "Pression préférée",
+      pressureLight: "Légère",
+      pressureMedium: "Moyenne",
+      pressureFirm: "Ferme",
       painPoints: "Points de douleur spécifiques",
       painPointsPlaceholder: "Où ça fait mal, et ce qui aggrave…",
+      nerveSymptoms: "Douleur, engourdissement ou picotements",
+      nerveSymptomsPlaceholder:
+        "Décrivez les symptômes et s’ils irradient (ex. dans un bras ou une jambe)…",
       healthIssues: "Problèmes de santé",
       healthIssuesPlaceholder: "Conditions à connaître…",
       allergies: "Allergies",
@@ -601,6 +663,11 @@ export const messages: Record<Locale, Messages> = {
       occupationPlaceholder: "Bureau, métiers, soins…",
       sports: "Sport pratiqué",
       sportsPlaceholder: "Course, gym, yoga…",
+      recentInjury: "Blessure ou accident récent?",
+      recentInjuryPlaceholder: "Oui / non, et environ quand",
+      recentInjuryDetails: "Détails de la blessure",
+      recentInjuryDetailsPlaceholder:
+        "Entorse, chute, accident auto, restrictions…",
       recentSurgery: "Chirurgie récente?",
       recentSurgeryPlaceholder: "Oui / non, et quand",
       surgeryDetails: "Détails de la chirurgie",
@@ -617,8 +684,27 @@ export const messages: Record<Locale, Messages> = {
       recentMassageAreasPlaceholder: "Dos, cou, jambes…",
       medication: "Médication",
       medicationPlaceholder: "Médicaments pertinents pour le massage…",
+      contraindications: "Cochez ce qui s’applique",
+      contraindicationHighBloodPressure: "Tension artérielle élevée",
+      contraindicationBloodClot: "Caillot / phlébite",
+      contraindicationSkinInfection: "Infection cutanée ou plaie ouverte",
+      contraindicationFever: "Fièvre ou maladie contagieuse",
+      contraindicationCancerTreatment: "Traitement du cancer (en cours)",
+      drapingPreferences: "Préférences de drapage / confort",
+      drapingPreferencesPlaceholder:
+        "Zones à garder couvertes, ou que vous êtes à l’aise de découvrir…",
+      homeAccess: "Notes d’accès au domicile",
+      homeAccessPlaceholder: "Code, stationnement, étage, animaux…",
+      emergencyContactName: "Contact d’urgence — nom",
+      emergencyContactNamePlaceholder: "Nom complet",
+      emergencyContactPhone: "Contact d’urgence — téléphone",
+      emergencyContactPhonePlaceholder: "(555) 555-5555",
       other: "Autre",
       otherPlaceholder: "Préférences ou détails absents de la liste…",
+      informedConsent:
+        "Je confirme que ces renseignements sont exacts au meilleur de ma connaissance, et je comprends que le massage ne remplace pas un avis ou un traitement médical.",
+      consentRequired:
+        "Veuillez cocher la case de consentement pour envoyer le formulaire.",
       submit: "Envoyer le formulaire",
       skip: "Passer / envoyer vide",
       submitting: "Enregistrement…",
