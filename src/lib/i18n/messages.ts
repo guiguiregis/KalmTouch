@@ -103,6 +103,7 @@ export type Messages = {
     preferredTime: string;
     noWeekendTimes: string;
     noSlots: string;
+    specificTimeContact: string;
     name: string;
     namePlaceholder: string;
     email: string;
@@ -344,6 +345,8 @@ export const messages: Record<Locale, Messages> = {
       preferredTime: "Preferred time",
       noWeekendTimes: "No weekend times open in the next few weeks.",
       noSlots: "No open slots on this day.",
+      specificTimeContact:
+        "For a specific time slot, please contact us.",
       name: "Name",
       namePlaceholder: "Your name",
       email: "Email",
@@ -595,6 +598,8 @@ export const messages: Record<Locale, Messages> = {
       noWeekendTimes:
         "Aucune plage de fin de semaine ouverte dans les prochaines semaines.",
       noSlots: "Aucune plage ouverte ce jour-là.",
+      specificTimeContact:
+        "Pour une plage horaire spécifique, veuillez nous contacter.",
       name: "Nom",
       namePlaceholder: "Votre nom",
       email: "Courriel",

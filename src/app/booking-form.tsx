@@ -573,6 +573,7 @@ export default function BookingForm() {
             </div>
           )
         ) : null}
+        <p className="mt-2 text-sm text-muted">{copy.specificTimeContact}</p>
       </div>
 
       <label className="block">
