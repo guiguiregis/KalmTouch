@@ -1,3 +1,22 @@
+function formatContactPhone(raw: string | undefined) {
+  const digits = (raw ?? "").replace(/\D/g, "");
+  const national =
+    digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+
+  if (national.length !== 10) {
+    return { phoneDisplay: "", phoneE164: "" };
+  }
+
+  return {
+    phoneDisplay: `(${national.slice(0, 3)}) ${national.slice(3, 6)}-${national.slice(6)}`,
+    phoneE164: `+1${national}`,
+  };
+}
+
+const contactPhone = formatContactPhone(
+  process.env.NEXT_PUBLIC_CONTACT_PHONE,
+);
+
 export const SITE = {
   name: "KalmTouch",
   legalName: "KalmTouch Massage",
@@ -6,8 +25,8 @@ export const SITE = {
     "KalmTouch offers restorative on-site massage in the Ottawa/Gatineau area. Book Swedish, deep tissue, and prenatal sessions.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   email: "kalmtouch18@gmail.com",
-  phoneDisplay: "(503) 555-0142",
-  phoneE164: "+15035550142",
+  phoneDisplay: contactPhone.phoneDisplay,
+  phoneE164: contactPhone.phoneE164,
   areaServed: "Ottawa/Gatineau Area",
   serviceType: "On-site massage",
   instagramUrl: "https://www.instagram.com/kalmtouch_/",
